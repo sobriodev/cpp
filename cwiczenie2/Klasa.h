@@ -7,7 +7,7 @@ private:
     const static int MAKS_DLUGOSC = 10;
     const int KOD_BLEDU = 999;
     int tablica[MAKS_DLUGOSC];
-    int dlugosc = 0;
+    int dlugosc;
 
     static int licznik;
 

@@ -14,7 +14,7 @@ int Klasa::set(int *tablica, int dlugosc) {
 }
 
 int Klasa::get(int indeks) {
-    if (indeks > dlugosc - 1) {
+    if (indeks > dlugosc - 1 || indeks < 0) {
         return KOD_BLEDU;
     } else {
         return tablica[indeks];
@@ -24,6 +24,7 @@ int Klasa::get(int indeks) {
 int Klasa::licznik = 0;
 
 Klasa::Klasa() {
+    dlugosc = 0;
     licznik++;
 }
 
