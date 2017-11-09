@@ -1,24 +1,27 @@
 #include <iostream>
-#include "Matrix.h"
+#include "Array.h"
 
 int main() {
+    Array array1;
+    array1.printArray();
 
-    const unsigned int ROWS = 3;
-    const unsigned int COLUMNS = 6;
-    auto **originalMatrix = new double*[ROWS];
-    for (int i = 0; i < ROWS; ++i) { originalMatrix[i] = new double[COLUMNS]; }
-    for (int i = 0; i < ROWS; ++i) {
-        for (int j = 0; j < COLUMNS; j++) { originalMatrix[i][j] = i * j; }
-    }
+    Array array2(5, 6);
+    array2.printArray();
 
-    Matrix m(originalMatrix, ROWS, COLUMNS);
-    originalMatrix = Matrix::generateMatrix(3, 6);
-    Matrix m2(originalMatrix, 3, 6);
-    m2.printMatrix();
+    double **arr = Array::allocateMemory(2, 7);
+    Array::setValues(arr, 2, 7, 171);
+    Array array3(arr, 2, 7);
+    array3.printArray();
 
-    for (int i = 0; i < ROWS; ++i) { delete[] originalMatrix[i]; }
-    delete[] originalMatrix;
-    originalMatrix = nullptr;
+    Array array4 = array3;
+    array3.printArray();
+
+    array3.changeSize(8, 8);
+    array3.printArray();
+
+    double **arr2 = Array::generateArray(6, 9);
+    Array::printArray(arr2, 6, 9);
+    Array::freeMemory(arr2, 6);
 
     return 0;
 }
