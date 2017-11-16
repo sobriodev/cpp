@@ -34,6 +34,7 @@ public:
 public:
     void printArray();
     void changeArraySize(unsigned int newRows, unsigned int newColumns);
+    static double **generateRandomArray(unsigned int rows, unsigned int columns);
 
 };
 

@@ -1,18 +1,14 @@
-#include <iostream>
-#include <cstring>
 #include "Array/Array.h"
-#include "Utils/Utils.h"
 
 int main() {
-    unsigned int rows = 3, columns = 4;
-    double **ptr = Utils::allocateMemory(rows, columns, 4);
+    unsigned int rows = 5, columns = 3;
+    double **ptr = Array::generateRandomArray(rows, columns);
+    Array a(ptr, rows, columns);
+    a.printArray();
+    a.changeArraySize(0, 0);
+    a.printArray();
 
-    Array a2(ptr, rows, columns);
-    a2.printArray();
-    std::cout << "---" << std::endl;
-    a2.changeArraySize(12, 12);
-    a2.printArray();
 
-    Utils::freeMemory(ptr, rows);
+
     return 0;
 }

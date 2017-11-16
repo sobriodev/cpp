@@ -1,5 +1,6 @@
 #include "Array.h"
 #include "../Utils/Utils.h"
+#include <random>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCSimplifyInspection"
@@ -106,6 +107,22 @@ void Array::changeArraySize(const unsigned int newRows, const unsigned int newCo
         array = Utils::allocateMemory(rows, columns);
         if (debugEnabled) { std::cout << "#DEBUG# Array rows (columns) was 0. Creating new array" << std::endl; }
     }
+}
+
+double **Array::generateRandomArray(const unsigned int rows, const unsigned int columns) {
+    double **ptr = Utils::allocateMemory(rows, columns);
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0, 1);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            ptr[i][j] = dis(gen);
+        }
+    }
+
+    return ptr;
 }
 
 #pragma clang diagnostic pop
