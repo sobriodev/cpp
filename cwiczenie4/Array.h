@@ -1,7 +1,5 @@
-#ifndef CWICZENIE4_MATRIX_H
-#define CWICZENIE4_MATRIX_H
-
-enum messagesIDs { DEFAULT_CONSTRUCTOR };
+#ifndef CWICZENIE4_ARRAY_H
+#define CWICZENIE4_ARRAY_H
 
 class Array {
 
@@ -21,11 +19,14 @@ public:
     Array(double **originalArray, unsigned int rows, unsigned int columns);
     Array(Array &originalArray);
 
-    unsigned int getRows();
-    unsigned int getColumns();
-    double **getArray();
+    unsigned int getRows()const;
+    unsigned int getColumns() const;
+    double **getArray() const;
 
     ~Array();
+
+    /* overloaded operators */
+    Array &operator=(const Array &a);
 
 private:
     unsigned int rows;
@@ -34,4 +35,4 @@ private:
 };
 
 
-#endif //CWICZENIE4_MATRIX_H
+#endif //CWICZENIE4_ARRAY_H

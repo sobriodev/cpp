@@ -107,15 +107,15 @@ Array::Array(Array &originalArray): rows(originalArray.getRows()), columns(origi
     if (debugEnabled) { std::cout << "#DEBUG The copy constructor (Array " << rows << "x" << columns << ") was used" << std::endl; }
 }
 
-unsigned int Array::getRows() {
+unsigned int Array::getRows() const {
     return rows;
 }
 
-unsigned int Array::getColumns() {
+unsigned int Array::getColumns() const {
     return columns;
 }
 
-double **Array::getArray() {
+double **Array::getArray() const {
     return array;
 }
 
@@ -126,5 +126,22 @@ void Array::changeSize(const unsigned int rows, const unsigned int columns) {
     this->columns = columns;
     if (debugEnabled) { std::cout << "#DEBUG Change array size to Array " << rows << "x" << columns << std::endl; }
 }
+
+Array &Array::operator=(const Array &a) {
+    freeMemory(array, rows);
+    allocateMemory(a.getRows(), a.getColumns());
+    rows = a.getRows();
+    columns = a.getColumns();
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] = a.getArray()[i][j];
+        }
+    }
+    return *this;
+}
+
+/* overloaded operators */
+
+
 
 #pragma clang diagnostic pop
