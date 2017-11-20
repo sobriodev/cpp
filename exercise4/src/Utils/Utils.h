@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include "../Array/Array.h"
 
 class Utils {
 
@@ -21,6 +22,13 @@ public:
      * @param rows
      */
     static void freeMemory(double **ptr, unsigned int rows);
+
+    /**
+     *
+     * @param array1
+     * @param array2
+     */
+    static void compareArraysSizes(const Array &array1, const Array &array2);
 };
 
 

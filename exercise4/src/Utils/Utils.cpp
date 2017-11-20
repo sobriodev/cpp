@@ -21,3 +21,13 @@ void Utils::freeMemory(double **ptr, const unsigned int rows) {
     }
     delete[] ptr;
 }
+
+void Utils::compareArraysSizes(const Array &array1, const Array &array2) {
+    if (array1.getRows() != array2.getRows() || array1.getColumns() != array2.getColumns()) {
+        std::cout << "Operator+ -> Arrays do not have the same sizes. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    } else if (!array1.getRows() || !array1.getColumns() || !array2.getRows() || !array2.getColumns()) {
+        std::cout << "Operator+ -> Arrays have NULL fields. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+}

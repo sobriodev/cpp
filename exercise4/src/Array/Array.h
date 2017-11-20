@@ -1,6 +1,8 @@
 #ifndef EXERCISE4_ARRAY_H
 #define EXERCISE4_ARRAY_H
 
+#include <ostream>
+
 class Array {
 
 /** Private variables */
@@ -35,6 +37,16 @@ public:
     void printArray();
     void changeArraySize(unsigned int newRows, unsigned int newColumns);
     static double **generateRandomArray(unsigned int rows, unsigned int columns);
+
+/* Overloaded operators */
+public:
+    Array& operator=(const Array& other);
+    Array& operator+();
+    Array& operator-();
+    Array& operator+=(const Array& other);
+    Array& operator-=(const Array& other);
+    Array& operator*=(unsigned int value);
+    double operator()(unsigned int row, unsigned int column);
 
 };
 
