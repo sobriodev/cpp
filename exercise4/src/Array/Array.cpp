@@ -194,5 +194,38 @@ double Array::operator()(const unsigned int row, const unsigned int column) {
     return array[row][column];
 }
 
+double *Array::operator[](const unsigned int value) {
+    return array[value];
+}
+
+Array &Array::operator*=(const Array &other) {
+    if (!rows || !other.getColumns() || !columns || !other.getColumns()) {
+        std::cout << "Operator+ -> Arrays have NULL fields. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if (columns != other.getRows()) {
+        std::cout << "Array1 rows != array2 columns. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    double **tempArray = Utils::allocateMemory(rows, other.getColumns());
+    for(int i = 0; i < rows; ++i) {
+        for(int j = 0; j < other.getColumns(); ++j) {
+            for(int k = 0; k < columns; ++k) {
+                tempArray[i][j] += array[i][k] * other.getArray()[k][j];
+            }
+        }
+    }
+
+    changeArraySize(rows, other.getColumns());
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < other.getColumns(); ++j) {
+            array[i][j] = tempArray[i][j];
+        }
+    }
+
+    Utils::freeMemory(tempArray, rows);
+    return *this;
+}
+
 
 #pragma clang diagnostic pop

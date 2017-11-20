@@ -1,7 +1,7 @@
 #ifndef EXERCISE4_ARRAY_H
 #define EXERCISE4_ARRAY_H
 
-#include <ostream>
+#include <iostream>
 
 class Array {
 
@@ -46,6 +46,8 @@ public:
     Array& operator+=(const Array& other);
     Array& operator-=(const Array& other);
     Array& operator*=(unsigned int value);
+    Array& operator*=(const Array &other);
+    double *operator[](unsigned int value);
     double operator()(unsigned int row, unsigned int column);
 
 };

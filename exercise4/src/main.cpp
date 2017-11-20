@@ -3,14 +3,17 @@
 #include "Array/operators.h"
 
 int main() {
-    const unsigned int rows = 1;
-    const unsigned int columns = 2;
-    double **ptr = Utils::allocateMemory(rows, columns, 12);
+    const unsigned int rows = 3;
+    const unsigned int columns = 4;
+    double **ptr = Utils::allocateMemory(rows, columns, 2);
+    double **ptr2 = Utils::allocateMemory(columns, rows, 3);
 
     Array array(ptr, rows, columns);
-    std::cout << array(0,1) << std::endl;
+    Array array2(ptr2, columns, rows);
+    std::cout << (array *= array2);
 
     Utils::freeMemory(ptr, rows);
+    Utils::freeMemory(ptr2, columns);
 
     return 0;
 }
