@@ -121,8 +121,111 @@ double **Array::generateRandomArray(const unsigned int rows, const unsigned int 
             ptr[i][j] = dis(gen);
         }
     }
-
     return ptr;
 }
+
+/** ------------------------------------------- */
+/** ----------- OVERLOADED OPERATORS ---------- */
+Array &Array::operator=(const Array &other) {
+    Utils::freeMemory(array, rows);
+    rows = other.getRows();
+    columns = other.getColumns();
+    array = Utils::allocateMemory(rows, columns);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] = other.getArray()[i][j];
+        }
+    }
+    if (debugEnabled) { std::cout << "#DEBUG# operator= was used" << std::endl; }
+    return *this;
+}
+
+Array &Array::operator+() {
+    if (debugEnabled) { std::cout << "#DEBUG# unary operator+ was used" << std::endl; }
+    return *this;
+}
+
+Array &Array::operator-() {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] = -array[i][j];
+        }
+    }
+    if (debugEnabled) { std::cout << "#DEBUG# unary operator- was used" << std::endl; }
+    return *this;
+}
+
+Array &Array::operator+=(const Array &other) {
+    Utils::compareArraysSizes(*this, other);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] += other.getArray()[i][j];
+        }
+    }
+    return *this;
+}
+
+Array &Array::operator-=(const Array &other) {
+    Utils::compareArraysSizes(*this, other);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] -= other.getArray()[i][j];
+        }
+    }
+    return *this;
+}
+
+Array &Array::operator*=(const unsigned int value) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] *= value;
+        }
+    }
+}
+
+double Array::operator()(const unsigned int row, const unsigned int column) {
+    if (rows == 0 || columns == 0) {
+        std::cout << "Empty array. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    } else if (row > rows - 1 || column > columns - 1) {
+        std::cout << "Invalid index. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    return array[row][column];
+}
+
+double *Array::operator[](const unsigned int value) {
+    return array[value];
+}
+
+Array &Array::operator*=(const Array &other) {
+    if (!rows || !other.getColumns() || !columns || !other.getColumns()) {
+        std::cout << "Operator+ -> Arrays have NULL fields. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    if (columns != other.getRows()) {
+        std::cout << "Array1 rows != array2 columns. Aborting!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    double **tempArray = Utils::allocateMemory(rows, other.getColumns());
+    for(int i = 0; i < rows; ++i) {
+        for(int j = 0; j < other.getColumns(); ++j) {
+            for(int k = 0; k < columns; ++k) {
+                tempArray[i][j] += array[i][k] * other.getArray()[k][j];
+            }
+        }
+    }
+
+    changeArraySize(rows, other.getColumns());
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < other.getColumns(); ++j) {
+            array[i][j] = tempArray[i][j];
+        }
+    }
+
+    Utils::freeMemory(tempArray, rows);
+    return *this;
+}
+
 
 #pragma clang diagnostic pop
