@@ -7,13 +7,13 @@ int main() {
     String B;
     B = "_ciag_B_";
     B += A;
-    std::cout << "Istnieją : " << String::howMuchObjects() << " ciągi" << std::endl;
+    std::cout << "Istnieja : " << String::howMuchObjects() << " ciagi" << std::endl;
     String C;
-    std::cout << "Podaj ciąg C: ";
+    std::cout << "Podaj ciag C: ";
     std::cin >> C;
     String D;
     D = A + B + "_cos_";
-    std::cout << "Istnieją : " << String::howMuchObjects() << " ciągi" << std::endl;
+    std::cout << "Istnieja : " << String::howMuchObjects() << " ciagi" << std::endl;
     A += "_dodaje_zwykly_ciag_";
     C += A;
     std::cout << A << B << C << D << std::endl;
