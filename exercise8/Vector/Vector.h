@@ -61,6 +61,40 @@ public:
     double *operator[](unsigned index);
 
     /**
+     * Length getter
+     * @return vector length
+     */
+    unsigned int getLength() const;
+
+    /**
+     * Set new vector length
+     * @param length length
+     */
+    void setLength(unsigned length);
+
+    /**
+     * Add new value to vector
+     * @param value element to add
+     */
+    void addElement(double value);
+
+    /**
+     * Equality operator
+     * @param first First Vector
+     * @param second Second Vector
+     * @return true if vector are equals, false otherwise
+     */
+    friend bool operator==(const Vector &first, const Vector &second);
+
+    /**
+     * Inequality operator
+     * @param first First Vector
+     * @param second Second Vector
+     * @return true if vector are not equals, false otherwise
+     */
+    friend bool operator!=(const Vector &first, const Vector &second);
+
+    /**
      * Print vector using overloaded output stream operator
      * @param os output stream instance
      * @param vector vector object to print
@@ -69,10 +103,12 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Vector &vector);
 
     /**
-     * Length getter
-     * @return vector length
+     * Input vector using overloaded input stream operator
+     * @param is input stream instance
+     * @param vector vector object to input values
+     * @return input stream instance
      */
-    unsigned int getLength() const;
+    friend std::istream &operator>>(std::istream &is, Vector &vector);
 
 };
 
