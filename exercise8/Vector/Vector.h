@@ -1,12 +1,11 @@
 #ifndef EXERCISE8_VECTOR_H
 #define EXERCISE8_VECTOR_H
 
-
 #include <ostream>
 
 class Vector {
 
-private:
+protected:
     /**
      * Vector length
      */
@@ -24,12 +23,12 @@ public:
 
     /**
      * Constructor creating a vector from a given one
-     * @param oVector original vector
+     * @param array original vector
      * @param length original vector length
      */
-    Vector(const double *oVector, unsigned length);
+    Vector(const double *array, unsigned length);
 
-/**
+    /**
      * Constructor creating a vector with all zeroes from a given length
      * @param length vector length
      */
@@ -70,13 +69,13 @@ public:
      * Set new vector length
      * @param length length
      */
-    void setLength(unsigned length);
+    virtual void setLength(unsigned length);
 
     /**
      * Add new value to vector
      * @param value element to add
      */
-    void addElement(double value);
+    virtual void addElement(double value);
 
     /**
      * Equality operator

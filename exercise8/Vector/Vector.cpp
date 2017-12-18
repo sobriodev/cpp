@@ -4,12 +4,12 @@
 
 Vector::Vector(): length(0), vector(Utils::malloc(length)) {}
 
-Vector::Vector(const double *oVector, unsigned length):
+Vector::Vector(const double *array, unsigned length):
         length(length),
         vector(Utils::malloc(length))
 {
     for (int i = 0; i < length; ++i) {
-        vector[i] = oVector[i];
+        vector[i] = array[i];
     }
 }
 
